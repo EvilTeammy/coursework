@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <title>Peaky Blinders</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+
+</head>
+
+<body>
+    <div class="page">
+        <!-- ***** Preloader Start ***** -->
+        <div id="preloader">
+            <div class="jumper">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <!-- ***** Preloader End ***** -->
+
+        <!-- Header -->
+        <header class="">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="peaky_blinders_index.html">
+                        <h2>Peaky <em>Blinders</em></h2>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="peaky_blinders_index.html">Главная
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">Меню</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Контакты</a>
+                            </li>
+                            <li class="nav-item bag">
+                                <a class="nav-link" href="card.html">Сделать заказ
+                                    <span id="cart-count" class="badge badge-pill badge-danger">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+
+        <!-- Your existing HTML here -->
+
+
+
+
+
+
+        <div class="cart-container">
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <h3 id="cart-total"></h3>
+        </div>
+
+        <!-- Your existing footer here -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-content">
+                            <p>2024 Tim's work</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            function updateCart() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                            <h4>${item.name}</h4>
+                            <p>${item.price} ₽ x ${item.quantity}</p>
+                            <button class="btn btn-danger remove-from-cart" data-id="${item.id}">Удалить</button>
+                        `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+                cartTotal.textContent = `Итого: ${total} ₽`;
+
+                document.querySelectorAll('.remove-from-cart').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        const itemIndex = cart.findIndex(product => product.id === id);
+                        if (itemIndex > -1) {
+                            cart.splice(itemIndex, 1);
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            updateCart();
+                        }
+                    });
+                });
+            }
+
+            updateCart();
+        });
+    </script>
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="cart.js"></script>
+
+
+
+
+
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t) {                   //declaring the array outside of the
+            if (!cleared[t.id]) {                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value = '';         // with more chance of typos
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+
+
+</body
